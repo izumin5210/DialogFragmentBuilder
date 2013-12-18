@@ -24,3 +24,20 @@ android {
 
 dependencies {
 }
+
+// プロジェクトルート配下のrepositoryディレクトリにデプロイする
+def deployTo = new File(rootDir, "repository")
+
+// Mavenプラグインの利用を宣言
+apply plugin: 'maven'
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository url: "./repository" // デプロイ先
+            pom.version = '1.0.0' // ライブラリバージョン
+            pom.groupId = 'info.izumin.android' // グループ名
+            pom.artifactId = 'dialogfragmentbuilder' // アーティファクト名
+        }
+    }
+}
